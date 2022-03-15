@@ -17,18 +17,26 @@ grid = np.full((x, y), '')
 words = random.sample(words_five, number_of_words)
 print(words)
 
+used_coords = []
 
 
+def check_coords(coord):
+    if coord in used_coords:
+        return True
+    else:
+        return False
 
 
 for word in words:
     word = [letter for letter in word]
     starting_point = (random.randint(0, x-1), random.randint(0, y-1))
     grid[starting_point] = word[0]
+    used_coords.append([starting_point[0], starting_point[1]])
     break_point = 0
     for i in range(1, len(word)):
         try:
             grid[starting_point[0], starting_point[1] + i] = word[i]
+            used_coords.append([starting_point[0], starting_point[1] + i])
         except IndexError:
             #grid[starting_point[0] + 1, [0]] = word[i]
             break_point = i
@@ -39,8 +47,30 @@ for word in words:
         for i in range(0, len(word)):
             try:
                 grid[starting_point[0] + 1, [0 + i]] = word[i]
+                used_coords.append([starting_point[0] + 1, 0 + i])
             except IndexError:
                 print("System Error: Please attempt again.")
                 break
 
-print(grid)
+
+#print(grid)
+#print('\n\n\n')
+#print(used_coords)
+#print(''.join(map(str, grid[0])))
+
+
+def create_grid(x, grid):
+    for level in range(1, x):
+        print(''.join(map(str, grid[level])))
+        #print('\n')
+
+
+def back_fill(array):
+    for (x, y), value in np.ndenumerate(array):
+        if value:
+            continue
+        grid[x, y] = random.choice(punctuation)
+    return grid
+
+print(back_fill(grid))
+create_grid(x, grid)
