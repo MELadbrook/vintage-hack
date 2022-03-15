@@ -7,10 +7,11 @@ words_four = {'help', 'dogs', 'cats', 'does'}
 words_five = {'pleat', 'hello', 'tears', 'mouse'}
 
 x = 10
-y = 8
+y = 20
 number_of_words = 2
 
-punctuation = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')']
+punctuation = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', ':', ';', '"',
+               '{', '}', '[', ']', '+', '=']
 
 grid = np.full((x, y), '')
 
@@ -74,3 +75,47 @@ def back_fill(array):
 
 print(back_fill(grid))
 create_grid(x, grid)
+
+
+'''
+create grid
+choose random spot
+create counter
+while counter < total words
+create temporary coords
+    add letter
+    if goes over the end
+        break
+    check if already filled
+    if yes
+        break
+    else add to temp coords
+    counter += 1
+add word to grid using temp coords
+
+'''
+
+def choose_words():
+    counter = 0
+    while counter < number_of_words:
+        for word in words:
+            starting_point = (random.randint(0, x - 1), random.randint(0, y - 1))
+            temp_coords = []
+            word = [letter for letter in word]
+            temp_coords.append([starting_point[0], starting_point[1]])
+            break_point = 0
+            for i in range(1, len(word)):
+                try:
+                    grid[starting_point[0], starting_point[1] + i] = word[i]
+                    temp_coords.append([starting_point[0], starting_point[1] + i])
+                except IndexError:
+                    break_point = i
+                    word = word[break_point:]
+                    break
+            if break_point > 0:
+                for i in range(0, len(word)):
+                    try:
+                        grid[starting_point[0] + 1, [0 + i]] = word[i]
+                        used_coords.append([starting_point[0] + 1, 0 + i])
+                    except IndexError:
+                        break
