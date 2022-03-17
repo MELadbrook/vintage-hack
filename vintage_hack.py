@@ -73,6 +73,16 @@ def back_fill(array):
         grid[x, y] = random.choice(punctuation)
     return grid
 
+
+def create_index(array):
+    counter = 0
+    index = {}
+    for (x, y), value in np.ndenumerate(array):
+        index[counter] = x, y
+        counter += 1
+    return index
+
+print(create_index(grid))
 print(back_fill(grid))
 create_grid(x, grid)
 
