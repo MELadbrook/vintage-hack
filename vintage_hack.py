@@ -3,19 +3,19 @@ __author__ = 'MLadbrook'
 import numpy as np
 import random
 
-words_four = {'help', 'dogs', 'cats', 'does'}
+words_four = {'help', 'dogs', 'cats', 'does', 'baby', 'burn', 'most', 'wake', 'want', 'good'}
 words_five = {'pleat', 'hello', 'tears', 'mouse'}
 
 x = 10
 y = 20
-number_of_words = 4
+number_of_words = 10
 
 punctuation = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', ':', ';', '"',
                '{', '}', '[', ']', '+', '=']
 
 grid = np.full((x, y), '')
 
-words = random.sample(words_five, number_of_words)
+words = random.sample(words_four, number_of_words)
 length_of_word = len(words[0])
 print(words)
 
@@ -52,6 +52,19 @@ def create_index(array):
         index[counter] = x, y
         counter += 1
     return index
+
+
+def check_word(answer, attempt):
+    number_correct = 0
+    to_check = answer
+    for letter in attempt:
+        if letter in to_check:
+            number_correct += 1
+            to_check = to_check.replace(letter, '')
+    return number_correct
+
+
+
 
 
 grid_index = create_index(grid)
@@ -98,6 +111,18 @@ for item in range(len(words)):
 print(grid)
 back_fill(grid)
 create_grid(x, grid)
+
+answer = random.choice(words)
+no_chances = 3
+while no_chances > 0:
+    guess = input('What word?')
+    if guess == answer:
+        print('Access granted.')
+        break
+    else:
+        no_chances -= 1
+        if no_chances == 0:
+            print('Self destruct initiated.')
 
 
 
