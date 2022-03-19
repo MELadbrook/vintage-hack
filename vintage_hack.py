@@ -3,8 +3,8 @@ __author__ = 'MLadbrook'
 import numpy as np
 import random
 
-words_four = {'help', 'dogs', 'cats', 'does', 'baby', 'burn', 'most', 'wake', 'want', 'good'}
-words_five = {'pleat', 'hello', 'tears', 'mouse'}
+words_four = ['help', 'dogs', 'cats', 'does', 'baby', 'burn', 'most', 'wake', 'want', 'good']
+words_five = ['pleat', 'hello', 'tears', 'mouse']
 
 x = 10
 y = 20
