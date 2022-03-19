@@ -31,7 +31,7 @@ def check_coords(coord):
 
 def create_grid(x, grid):
     '''Create string version of grid'''
-    for level in range(1, x):
+    for level in range(0, x):
         print(''.join(map(str, grid[level])))
         #print('\n')
 
@@ -66,11 +66,7 @@ grid_index = create_index(grid)
 
 #starting_points = random.sample(range(len(grid_index)-(len(words)-1)*(length_of_word)+1), len(words))
 #starting_points = np.cumsum(np.ones((len(words),), np.int) * (length_of_word+1) + np.random.randint(0, 200, (len(words),))) - (length_of_word+1)
-'''
-while True:
-  stuff()
-  if fail_condition:
-    break'''
+
 
 
 
@@ -80,13 +76,9 @@ def create_starting_points():
     diffs = [j-i for i, j in zip(starting_points[:-1], starting_points[1:])]
     print(diffs)
     for i in diffs:
-        print("l")
         if i < length_of_word + 1:
-            #break
             return create_starting_points()
     return starting_points
-
-#print(create_starting_points())
 
 
 starting_points = create_starting_points()
@@ -104,33 +96,8 @@ for item in range(len(words)):
 
 
 print(grid)
+back_fill(grid)
+create_grid(x, grid)
 
 
-#print(random.sample(range(len(grid_index)), len(words)))
-#print(random.sample(range(len(grid_index)-(len(words)-1)*(len(word)+1)), len(words)))
 
-'''
-for word in words:
-    word = [letter for letter in word]
-    starting_point = (random.randint(0, x-1), random.randint(0, y-1))
-    grid[starting_point] = word[0]
-    used_coords.append([starting_point[0], starting_point[1]])
-    break_point = 0
-    for i in range(1, len(word)):
-        try:
-            grid[starting_point[0], starting_point[1] + i] = word[i]
-            used_coords.append([starting_point[0], starting_point[1] + i])
-        except IndexError:
-            #grid[starting_point[0] + 1, [0]] = word[i]
-            break_point = i
-            print(break_point)
-            word = word[break_point:]
-            break
-    if break_point > 0:
-        for i in range(0, len(word)):
-            try:
-                grid[starting_point[0] + 1, [0 + i]] = word[i]
-                used_coords.append([starting_point[0] + 1, 0 + i])
-            except IndexError:
-                print("System Error: Please attempt again.")
-                break'''
