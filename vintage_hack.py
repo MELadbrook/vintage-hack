@@ -115,11 +115,15 @@ create_grid(x, grid)
 answer = random.choice(words)
 no_chances = 3
 while no_chances > 0:
-    guess = input('What word?')
+    guess = input('What word? ')
+    if guess not in words:
+        print('Invalid input. Retry.')
+        continue
     if guess == answer:
         print('Access granted.')
         break
     else:
+        print('Number of correct letters: {}'.format(check_word(guess, answer)))
         no_chances -= 1
         if no_chances == 0:
             print('Self destruct initiated.')
