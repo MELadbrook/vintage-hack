@@ -7,6 +7,9 @@ random.seed(10)
 
 words_four = ['help', 'dogs', 'cats', 'does', 'baby', 'burn', 'most', 'wake', 'want', 'good']
 words_five = ['pleat', 'hello', 'tears', 'mouse']
+words_six = []
+words_seven = []
+words_eight = []
 
 x = 10
 y = 20
@@ -17,9 +20,12 @@ punctuation = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', ':', ';', '"',
 
 grid = np.full((x, y), '')
 
-words = random.sample(words_four, number_of_words)
+difficulty = int(input('Select difficulty (1,2,3,4,5): '))
+diff_dict = {1: words_four, 2: words_five, 3: words_six, 4: words_seven, 5: words_eight}
+
+words = random.sample(diff_dict[difficulty], number_of_words)
 length_of_word = len(words[0])
-print(words)
+
 
 used_coords = []
 
@@ -66,13 +72,13 @@ def check_word(answer, attempt):
 
 
 grid_index = create_index(grid)
-print(grid_index)
+
 
 def create_starting_points():
     starting_points = random.sample(range(len(grid_index) - length_of_word), len(words))
     starting_points.sort()
     diffs = [j-i for i, j in zip(starting_points[:-1], starting_points[1:])]
-    print(diffs)
+    #print(diffs)
     for i in diffs:
         if i < length_of_word + 1:
             return create_starting_points()
@@ -80,8 +86,7 @@ def create_starting_points():
 
 
 starting_points = create_starting_points()
-print("starting points")
-print(starting_points)
+
 for item in range(len(words)):
     word = [letter for letter in words[item]]
     starting_point = starting_points[item]
@@ -90,7 +95,7 @@ for item in range(len(words)):
         grid[grid_index[starting_point + i]] = word[i]
 
 
-print(grid)
+
 back_fill(grid)
 create_grid(x, grid)
 
