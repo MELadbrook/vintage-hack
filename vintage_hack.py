@@ -64,23 +64,7 @@ def check_word(answer, attempt):
     return number_correct
 
 
-
-
-
 grid_index = create_index(grid)
-
-
-#print(back_fill(grid))
-#create_grid(x, grid)
-
-#print("Character from grid: {}".format(grid[grid_index[0]]))
-
-
-
-#starting_points = random.sample(range(len(grid_index)-(len(words)-1)*(length_of_word)+1), len(words))
-#starting_points = np.cumsum(np.ones((len(words),), np.int) * (length_of_word+1) + np.random.randint(0, 200, (len(words),))) - (length_of_word+1)
-
-
 
 
 def create_starting_points():
@@ -99,10 +83,6 @@ starting_points = create_starting_points()
 for item in range(len(words)):
     word = [letter for letter in words[item]]
     starting_point = starting_points[item]
-    #for point in starting_points:
-     #   if starting_point - point < len(word) | starting_point - point != 0:
-
-
     grid[grid_index[starting_point]] = word[0]
     for i in range(1, len(word)):
         grid[grid_index[starting_point + i]] = word[i]
