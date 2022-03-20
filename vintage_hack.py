@@ -3,6 +3,8 @@ __author__ = 'MLadbrook'
 import numpy as np
 import random
 
+random.seed(10)
+
 words_four = ['help', 'dogs', 'cats', 'does', 'baby', 'burn', 'most', 'wake', 'want', 'good']
 words_five = ['pleat', 'hello', 'tears', 'mouse']
 
@@ -33,7 +35,6 @@ def create_grid(x, grid):
     '''Create string version of grid'''
     for level in range(0, x):
         print(''.join(map(str, grid[level])))
-        #print('\n')
 
 
 def back_fill(array):
@@ -46,7 +47,7 @@ def back_fill(array):
 
 
 def create_index(array):
-    counter = 0
+    counter = 1
     index = {}
     for (x, y), value in np.ndenumerate(array):
         index[counter] = x, y
@@ -65,10 +66,10 @@ def check_word(answer, attempt):
 
 
 grid_index = create_index(grid)
-
+print(grid_index)
 
 def create_starting_points():
-    starting_points = random.sample(range(len(grid_index)), len(words))
+    starting_points = random.sample(range(len(grid_index) - length_of_word), len(words))
     starting_points.sort()
     diffs = [j-i for i, j in zip(starting_points[:-1], starting_points[1:])]
     print(diffs)
@@ -79,7 +80,8 @@ def create_starting_points():
 
 
 starting_points = create_starting_points()
-
+print("starting points")
+print(starting_points)
 for item in range(len(words)):
     word = [letter for letter in words[item]]
     starting_point = starting_points[item]
