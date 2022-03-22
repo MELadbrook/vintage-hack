@@ -232,6 +232,7 @@ def create_starting_points(grid_index, length_of_word, words):
 def main():
     main_grid = np.full((x, y), '')
     difficulty = int(input('Select difficulty (1,2,3,4): '))
+    print('\n')
     diff_dict = {1: words_four, 2: words_five, 3: words_six, 4: words_seven, 5: words_eight}
     words = random.sample(diff_dict[difficulty], number_of_words)
     length_of_word = len(words[0])
@@ -245,6 +246,7 @@ def main():
             main_grid[grid_index[starting_point + i]] = word[i]
     back_fill(main_grid)
     create_grid(x, main_grid)
+    print('\n')
     answer = random.choice(words)
     no_chances = 3
     while no_chances > 0:
@@ -254,7 +256,9 @@ def main():
             continue
         if guess == answer:
             print('Access granted.')
-            break
+            again = input('Again? ')
+            if again == 'Y'.lower():
+                main()
         else:
             print('Number of correct letters: {}'.format(check_word(guess, answer)))
             no_chances -= 1
