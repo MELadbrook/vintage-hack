@@ -2,6 +2,8 @@ __author__ = 'MLadbrook'
 
 import numpy as np
 import random
+import flask
+app = flask.Flask(__name__)
 
 
 words_four = ['help', 'dogs', 'cats', 'does', 'baby', 'burn', 'most', 'wake',
@@ -229,6 +231,7 @@ def create_starting_points(grid_index, length_of_word, words):
     return starting_points
 
 
+@app.route("/")
 def main():
     main_grid = np.full((x, y), '')
     difficulty = int(input('Select difficulty (1,2,3,4): '))
