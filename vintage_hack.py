@@ -3,7 +3,13 @@ __author__ = 'MLadbrook'
 import numpy as np
 import random
 from flask import Flask, request, render_template
+from flask_wtf import Form
+from flask_bootstrap import Bootstrap
+from wtforms import StringField, SubmitField
+#from wtforms.validators import Required
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'hard to guess string'
+bootstrap = Bootstrap(app)
 
 
 words_four = ['help', 'dogs', 'cats', 'does', 'baby', 'burn', 'most', 'wake',
@@ -187,6 +193,11 @@ punctuation = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', ':', ';', '"',
                '{', '}', '[', ']', '+', '=', '?', '/', '>', '<', '~', '|', ',']
 
 
+class NameForm(Form):
+    name = StringField('What is your name?')
+    submit = SubmitField('Submit')
+
+
 def create_grid(x, grid):
     '''Create string version of grid'''
     for level in range(0, x):
@@ -233,6 +244,8 @@ def create_starting_points(grid_index, length_of_word, words):
 
 @app.route('/', methods = ["GET","POST"])
 def main():
+    name = None
+    form = NameForm()
     main_grid = np.full((x, y), '')
     difficulty = int(input('Select difficulty (1,2,3,4): '))
     print('\n')
@@ -271,6 +284,7 @@ def main():
                 if again == 'Y'.lower():
                     main()
     return render_template()
+
 
 if __name__ == '__main__':
     main()
